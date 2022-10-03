@@ -11,7 +11,7 @@ import modelo.*;
  *
  * @author alumno
  */
-public class Lista {
+public class Lista <T>{
     
     private Nodo first;
     private Nodo actual;
@@ -24,8 +24,8 @@ public class Lista {
         
     }
     
-    public void crearNodo(Object obj) {
-        Nodo n = new Nodo(obj);
+    public void crearNodo(T typo) {
+        Nodo<T> n = new Nodo<T>(typo);
         
         if(first == null) {
             first = n;
@@ -40,24 +40,24 @@ public class Lista {
     
     public void moveForward(){
         //This method move de current pointer to the next node of the list.
-        
-        actual = actual.getSig();
-        if(actual == null)
-            actual = last;
+        if (actual.getSig() != null)
+            setActual(actual.getSig());
     }
     
     public void goBack(){
         //This method move de current pointer to the previous node of the list.
-        
-        actual = actual.getAnt();
-        
-        if(actual == null)
-            actual = first;
+        if (actual.getAnt() != null)
+            setActual(actual.getAnt());
     }
     
-    public void resetCurrent(){
+    public void resetCurrentFirst(){
         //When is required this method move the current pointer to the head list from beginning.
         actual = first;
+    }
+    
+    public void resetCurrentLast(){
+        //When is required this method move the current pointer to the last list from ending.
+        actual = last;
     }
 
 //    public T getActual() {
@@ -71,4 +71,29 @@ public class Lista {
     public Boolean esPrimero() {
         return (actual.getAnt() == null);
     }
+
+    public Nodo getActual() {
+        return actual;
+    }
+
+    public void setActual(Nodo actual) {
+        this.actual = actual;
+    }
+
+    public Nodo getFirst() {
+        return first;
+    }
+
+    public void setFirst(Nodo first) {
+        this.first = first;
+    }
+
+    public Nodo getLast() {
+        return last;
+    }
+
+    public void setLast(Nodo last) {
+        this.last = last;
+    }
+    
 }

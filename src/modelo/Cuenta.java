@@ -80,7 +80,7 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "Cuenta{" + "numCuenta=" + numCuenta + ", fecha=" + fecha + ", saldo=" + saldo + ", propietario=" + propietario + '}';
+        return "Cuenta{" + "numCuenta=" + numCuenta + ", fecha=" + fecha.getTime() + ", saldo=" + saldo + ", propietario=" + propietario + '}';
     }
     
 }

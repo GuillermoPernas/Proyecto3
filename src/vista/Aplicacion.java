@@ -4,17 +4,52 @@
  */
 package vista;
 
+import controlador.Lista;
+import controlador.Nodo;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
+import modelo.Cuenta;
+
 /**
  *
  * @author Pernas
  */
 public class Aplicacion extends javax.swing.JFrame {
 
+    Lista cuentas = new Lista();
+    
+    // Creo una variable para la fecha para poder usarla en varios lugares del codigo
+    private GregorianCalendar fecha;
+    // Creo un formato para la fecha
+    private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    
     /**
      * Creates new form Aplicacion
      */
     public Aplicacion() {
         initComponents();
+        
+        creaNuevo(1, 1867.23f, "Manuel", new GregorianCalendar(1996, 11, 07));
+        creaNuevo(2, 2537.39f, "Luis", new GregorianCalendar(1991, 06, 14));
+        creaNuevo(3, 7345.64f, "Maria", new GregorianCalendar(1988, 01, 30));
+        creaNuevo(4, 3647.02f, "Juan", new GregorianCalendar(2001, 05, 23));
+        creaNuevo(5, 4568.95f, "Laura", new GregorianCalendar(1999, 11, 14));
+        
+        cuentas.resetCurrentFirst();
+        
+        // CONTROL ===========================
+        //        for (int i = 0; i < 4; i++) {
+        //            System.out.println(cuentas.getActual().getTypo().toString());
+        //            cuentas.moveForward();
+        //        }
+        // CONTROL ===========================
+        
+        
+        cuentas.resetCurrentFirst();
+        modificaBotones();
+        rellenarTextFields();
     }
 
     /**
@@ -26,22 +61,256 @@ public class Aplicacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        numeroCuentaLabel = new javax.swing.JLabel();
+        fechaAltaLabel = new javax.swing.JLabel();
+        saldoLabel = new javax.swing.JLabel();
+        propietarioLabel = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        numeroCuentaTextField = new javax.swing.JTextField();
+        fechaAltaTextField = new javax.swing.JTextField();
+        saldoTextField = new javax.swing.JTextField();
+        propietarioTextField = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        anteriorButton = new javax.swing.JButton();
+        siguienteButton = new javax.swing.JButton();
+        nuevoButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+
+        jPanel2.setBackground(new java.awt.Color(153, 255, 153));
+
+        numeroCuentaLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        numeroCuentaLabel.setText("Nº de cuenta");
+
+        fechaAltaLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        fechaAltaLabel.setText("Fecha de alta");
+
+        saldoLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        saldoLabel.setText("Saldo");
+
+        propietarioLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        propietarioLabel.setText("Propietario");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(numeroCuentaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fechaAltaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(saldoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(propietarioLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(numeroCuentaLabel)
+                .addGap(18, 18, 18)
+                .addComponent(fechaAltaLabel)
+                .addGap(18, 18, 18)
+                .addComponent(saldoLabel)
+                .addGap(18, 18, 18)
+                .addComponent(propietarioLabel)
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(102, 255, 102));
+        jPanel3.setPreferredSize(new java.awt.Dimension(200, 200));
+        jPanel3.setVerifyInputWhenFocusTarget(false);
+
+        numeroCuentaTextField.setEditable(false);
+        numeroCuentaTextField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        fechaAltaTextField.setEditable(false);
+        fechaAltaTextField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        saldoTextField.setEditable(false);
+        saldoTextField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        propietarioTextField.setEditable(false);
+        propietarioTextField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(numeroCuentaTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(fechaAltaTextField)
+                    .addComponent(saldoTextField)
+                    .addComponent(propietarioTextField))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(numeroCuentaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(fechaAltaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(saldoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(propietarioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(51, 255, 102));
+
+        anteriorButton.setText("Anterior");
+        anteriorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorButtonActionPerformed(evt);
+            }
+        });
+
+        siguienteButton.setText("Siguiente");
+        siguienteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguienteButtonActionPerformed(evt);
+            }
+        });
+
+        nuevoButton.setText("Nuevo");
+        nuevoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addComponent(anteriorButton)
+                .addGap(26, 26, 26)
+                .addComponent(nuevoButton)
+                .addGap(27, 27, 27)
+                .addComponent(siguienteButton)
+                .addGap(66, 66, 66))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(anteriorButton)
+                    .addComponent(siguienteButton)
+                    .addComponent(nuevoButton))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void siguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteButtonActionPerformed
+        if (nuevoButton.isEnabled()) {
+            cuentas.moveForward();
+            rellenarTextFields();
+        } else {
+            creaNuevo(Integer.parseInt(numeroCuentaTextField.getText()), 
+                        Float.parseFloat(saldoTextField.getText()), 
+                        propietarioTextField.getText(), 
+                        fecha);
+            efectosAceptarCancelar();
+        }
+        modificaBotones();
+            
+    }//GEN-LAST:event_siguienteButtonActionPerformed
+
+    private void anteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorButtonActionPerformed
+        if (nuevoButton.isEnabled()) {
+            cuentas.goBack();
+            rellenarTextFields();
+        } else {
+            efectosAceptarCancelar();
+        }
+        modificaBotones();
+    }//GEN-LAST:event_anteriorButtonActionPerformed
+
+    private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
+        anteriorButton.setText("Cancelar");
+        siguienteButton.setText("Aceptar");
+        anteriorButton.setEnabled(true);
+        siguienteButton.setEnabled(true);
+        nuevoButton.setEnabled(false);
+        
+        Cuenta c = (Cuenta)cuentas.getLast().getTypo();
+        fecha = new GregorianCalendar();
+        String cadenaFecha = df.format(fecha.getTime());
+        numeroCuentaTextField.setText(c.getNumCuenta()+1+"");
+        fechaAltaTextField.setText(cadenaFecha);
+        saldoTextField.setText("");
+        saldoTextField.setEditable(true);
+        propietarioTextField.setText("");
+        propietarioTextField.setEditable(true);
+    }//GEN-LAST:event_nuevoButtonActionPerformed
+
+    private void efectosAceptarCancelar() {
+        nuevoButton.setEnabled(true);
+        rellenarTextFields();
+        saldoTextField.setEditable(false);
+        propietarioTextField.setEditable(false);                                       
+        anteriorButton.setText("Anterior");
+        siguienteButton.setText("Siguiente");
+    }
     /**
      * @param args the command line arguments
      */
@@ -68,6 +337,10 @@ public class Aplicacion extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Aplicacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -78,5 +351,54 @@ public class Aplicacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anteriorButton;
+    private javax.swing.JLabel fechaAltaLabel;
+    private javax.swing.JTextField fechaAltaTextField;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton nuevoButton;
+    private javax.swing.JLabel numeroCuentaLabel;
+    private javax.swing.JTextField numeroCuentaTextField;
+    private javax.swing.JLabel propietarioLabel;
+    private javax.swing.JTextField propietarioTextField;
+    private javax.swing.JLabel saldoLabel;
+    private javax.swing.JTextField saldoTextField;
+    private javax.swing.JButton siguienteButton;
     // End of variables declaration//GEN-END:variables
+
+    private void creaNuevo(int i, float f, String st, GregorianCalendar gc) {
+        Cuenta c = new Cuenta(i, f, st, gc);
+        cuentas.crearNodo(c);
+    }
+    
+    private void modificaBotones() {
+        if (cuentas.esPrimero()) {
+            anteriorButton.setEnabled(false);
+        } else{
+            anteriorButton.setEnabled(true);
+        }
+        
+        if (cuentas.esUltimo()) {
+            siguienteButton.setEnabled(false);
+        } else {
+            siguienteButton.setEnabled(true);
+        }
+    }
+
+    private void rellenarTextFields() {
+        
+        // ***************************************
+        Cuenta c = (Cuenta) cuentas.getActual().getTypo();
+        // Cuenta c = new Cuenta();
+        // ***************************************
+        String fecha = df.format(c.getFecha().getTime());
+        
+        numeroCuentaTextField.setText(c.getNumCuenta()+"");
+        fechaAltaTextField.setText(fecha);
+        saldoTextField.setText(c.getSaldo()+"");
+        propietarioTextField.setText(c.getPropietario());
+        
+    }
 }
